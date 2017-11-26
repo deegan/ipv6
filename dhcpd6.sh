@@ -32,6 +32,8 @@ DHCP_SUBNET=$(echo $PD_PREFIX | sed -e 's/56/64/')
 DHCP_START="${DHCP_SUBNET::-3}2"
 DHCP_END="${DHCP_SUBNET::-3}ffff"
 
+# Only update if there was a change.
+if [[ $DHCP_PREFIX != $DHCP_SUBNET ]]; then
 # Generate new config into the current ipv6.conf file and restart dhcpd.
 echo "# COMHEM PD: $PD_PREFIX
 subnet6 $DHCP_SUBNET {
@@ -56,4 +58,5 @@ else
     /usr/sbin/ip -6 addr del $MY_CURRENT_IP dev $DHCP_DEV
     /usr/sbin/ip -6 addr add $MY_PD_IP dev $DHCP_DEV
     /usr/sbin/dhcpd -6 -cf /etc/dhcpd/ipv6.conf
+fi
 fi
