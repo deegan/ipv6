@@ -43,7 +43,7 @@ echo "interface $RADVD_DEV {
                 AdvAutonomous on;
                 AdvRouterAddr on;
         };
-        RDNSS 2a04:ae3a:ae3a::1, 2a04:ae3a:ae3a::2 {
+        RDNSS 2a04:ae3a:ae3a::1 2a04:ae3a:ae3a::2 {
         };
 };
 " > $RADVD_CFG
